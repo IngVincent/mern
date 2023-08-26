@@ -1,0 +1,8 @@
+to start the node server please execute
+ node .\app.js   
+ I created a demon on package.json to run the node server:
+     "dev": "nodemon src/index.js"
+     just execute "npm run dev" without quotes, this command will auto update the backend when detect changes on sourcecode
+
+ index.js se encarga del front
+ app.js se encarga del backend

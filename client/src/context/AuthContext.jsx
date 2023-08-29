@@ -29,15 +29,16 @@ export const AuthProvider = ({ children }) => {
     };
 
     const signin = async (user) => {
-        const signup = async (user) => {
-            try {
-                const res = await loginRequest(user)
-                console.log(res)
-            } catch (error) {
-                setErrors(error.response.data)
-            }
+        try {
+            const res = await loginRequest(user);
+            setUser(res.data);
+            setIsAuthenticated(true);
+        } catch (error) {
+            //setErrors(error.response.data)
+            console.error(error)
         }
-    }
+    };
+
 
     return (
         <AuthContext.Provider

@@ -9,6 +9,9 @@ export const register = async (req, res) => {
     //console.log(email, password, username)
 
     try {
+        //comprueba que el usr no exista
+        const userFound = await User.findOne({ email })
+        if (userFound) return res.status(400).json(["This email already exists"]);
         //se hashea la contraseña
         const passwordHash = await bcryptjs.hash(password, 10);
 
@@ -83,8 +86,8 @@ export const profile = async (req, res) => {
     //consulta a la bd
     //const userFound = User.findById(res.user) //busca por medio del id el user recibio de la cookie
     const userFound = await User.findById(req.user.id); //obtiene el usuario en el objeto userFound
-    console.log("el id del user es: ", userFound._id) // imprime el id del usr de userFound
-    if (!userFound) return res.status(400).json({ message: "User not found" });
+    // console.log("el id del user es: ", userFound._id) // imprime el id del usr de userFound
+    if (!userFound) return res.status(400).json({ message: ['The mail already in use'] });
     //fin de la consulta
 
     //envio de datos 
